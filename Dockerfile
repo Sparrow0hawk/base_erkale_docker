@@ -1,15 +1,12 @@
-FROM node:argon
+FROM ubuntu:18.04
 
-# create an app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+LABEL name="base build for erkale"
+LABEL owner="Alex Coleman <a.coleman1@leeds.ac.uk"
+LABEL version="1.0.0"
+LABEL description="A base image for erkale library that installs requirements"
 
-# Install depedencies
-COPY package.json /usr/src/app
-RUN npm install
+# install required libraries
+RUN apt-get update -y
+RUN apt-get -y install gfortran libtool autogen pkg-config autoconf cmake build-essential libatlas-base-dev libgsl0-dev libhdf5-dev libint-dev libxc-dev git wget
 
-# bundle app source
-COPY . /usr/src/app
-
-EXPOSE 8080
-CMD ["npm", "start"]
+RUN echo "Base build complete!"

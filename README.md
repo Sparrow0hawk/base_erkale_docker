@@ -1,1 +1,1 @@
-# building docker base image
+# Docker base image for Erkale container
